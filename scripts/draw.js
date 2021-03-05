@@ -33,79 +33,81 @@ function draw(x){
 
 }
 
+if (onlyPeeking == true) {
+	draw(randpos)
+}
+
+
 function drawguess(){
-		clearboard()	
-		draw(randpos)
+	clearboard()
+	draw(randpos)
 
-		var guess = document.getElementById("guesser").value
-		ctx.beginPath();
-		ctx.fillStyle = "#d42838";
-		ctx.fillRect(position(guess)-2, 0, 4, 150);
-		ctx.stroke();
+	var guess = document.getElementById("guesser").value
+	ctx.beginPath();
+	ctx.fillStyle = "#d42838";
+	ctx.fillRect(position(guess)-2, 0, 4, 150);
+	ctx.stroke();
 
-		score(randpos, guess)
-
-
+	score(randpos, guess)
 }
 
 var points = 0
 
 function score(randpos, guess){
-		if (between(guess, randpos - binW/2, randpos + binW/2)){
-				document.getElementById("score").innerHTML = '<div class="score">4 points!!!</div>';
-				points = 4;
-		} else if (between(guess, randpos - 3*binW/2, randpos + 3*binW/2)){
-				document.getElementById("score").innerHTML = '<div class="score">3 points!!</div>';
-				points = 3;
-		} else if (between(guess, randpos - 5*binW/2, randpos + 5*binW/2)){
-				document.getElementById("score").innerHTML = '<div class="score">2 points!</div>';
-				points = 2;
-		} else {
-				document.getElementById("score").innerHTML = '<div class="score">0 points</div>';
-				points = 0;
-		}
+	if (between(guess, randpos - binW/2, randpos + binW/2)){
+		document.getElementById("score").innerHTML = '<div class="score">4 points!!!</div>';
+		points = 4;
+	} else if (between(guess, randpos - 3*binW/2, randpos + 3*binW/2)){
+		document.getElementById("score").innerHTML = '<div class="score">3 points!!</div>';
+		points = 3;
+	} else if (between(guess, randpos - 5*binW/2, randpos + 5*binW/2)){
+		document.getElementById("score").innerHTML = '<div class="score">2 points!</div>';
+		points = 2;
+	} else {
+		document.getElementById("score").innerHTML = '<div class="score">0 points</div>';
+		points = 0;
+	}
 }
 
 
 function between(x, min, max) {
-		return x >= min && x <= max;
+	return x >= min && x <= max;
 }
 
 function button_peek(){
-		if (window.confirm("Are you sure you want to peek?")) {
-				draw(randpos);
-		}
-		gtag('event', 'peek');
+	if (window.confirm("Are you sure you want to peek?")) {
+		draw(randpos);
+	}
+	gtag('event', 'peek');
 }
 
 
 function button_guess(){
-		if (window.confirm("Is this your final guess?")) {
-				drawguess();
-		}
-		gtag('event', 'guess');
+	if (window.confirm("Is this your final guess?")) {
+		drawguess();
+	}
+	gtag('event', 'guess');
 }
 
 function update_seed(){
-		Math.seedrandom();
-		$("#seed").val(Math.floor(Math.random() * 10000));
-		fire();
-		gtag('event', 'new_clue');
+	Math.seedrandom();
+	$("#seed").val(Math.floor(Math.random() * 10000));
+	fire();
+	gtag('event', 'new_clue');
 }
 
-
 function update_percentages(){
-		var checkbox = document.getElementById("percentages");
-		var text = document.getElementById("guessdisp");
-		if (checkbox.checked == true){
-				text.style.display = "block";
-		} else {
-				text.style.display = "none";
-		}
-		gtag('event', 'display_percentage');
+	var checkbox = document.getElementById("percentages");
+	var text = document.getElementById("guessdisp");
+	if (checkbox.checked == true){
+		text.style.display = "block";
+	} else {
+		text.style.display = "none";
+	}
+	gtag('event', 'display_percentage');
 }
 
 function button_clear(){
-		clearboard();
-		gtag('event', 'clear_board');
+	clearboard();
+	gtag('event', 'clear_board');
 }

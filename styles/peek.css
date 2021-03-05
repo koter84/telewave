@@ -1,0 +1,15 @@
+/* Custom CSS for Peeking */
+
+#board,
+#score,
+#scoreboard {
+	display: none;
+}
+
+.seed-container,
+button#new,
+button#commit,
+button#reset,
+#header a {
+	display: none;
+}
