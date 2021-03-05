@@ -207,3 +207,8 @@ div.scoreboard {
 .seed-container input{
 		vertical-align: middle;
 }
+
+/* Hide Seed */
+.seed-container input[type="text"] {
+	display: none;
+}
